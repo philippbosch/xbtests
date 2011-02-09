@@ -47,12 +47,12 @@ class Command(NoArgsCommand):
                 xbtestversionresults = xbtestversion.get_results()
                 for xbtestversionresult in xbtestversionresults:
                     self.stdout.write("TestVersionResult #%s\n" % xbtestversionresult.id)
-                    testversionresult_attr_keys = ('id', 'testversion', 'start_date', 'finished_date', 'status', 'os', 'browser', 'resolution', 'windowed', 'windowed_thumb', 'full_page', 'full_page_thumb', 'live_test_url')
+                    testversionresult_attr_keys = ('id', 'start_date', 'finished_date', 'status', 'os', 'browser', 'resolution', 'windowed', 'windowed_thumb', 'full_page', 'full_page_thumb', 'live_test_url')
                     try:
                         testversionresult = TestVersionResult.objects.get(id=xbtestversionresult.id)
                         for key in testversionresult_attr_keys:
                             setattr(testversionresult, key, getattr(xbtestversionresult, key))
-                            testversionresult.test = test
+                            testversionresult.testversion = testversion
                         testversionresult.save()
                     except TestVersionResult.DoesNotExist:
                         testversionresult_attrs = dict([(key, getattr(xbtestversionresult, key)) for key in testversionresult_attr_keys])
