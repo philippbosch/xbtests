@@ -1,10 +1,13 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from django.contrib.auth.models import User
+
 
 class Test(models.Model):
     url = models.URLField(verbose_name=_("URL"), verify_exists=False)
     test_date = models.DateTimeField(verbose_name=_("date"))
+    users = models.ManyToManyField(User, verbose_name=_("users"))
     
     def __unicode__(self):
         return u"%s" % self.url
