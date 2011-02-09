@@ -1,0 +1,11 @@
+MySQL-python
+South
+PIL
+BeautifulSoup
+Fabric
+gunicorn
+python-memcached
+-e git+https://github.com/django/django.git#egg=django
+-e git+http://github.com/mintchaos/django_compressor.git#egg=django_compressor
+-e git+http://github.com/philippbosch/django-orienteer.git#egg=orienteer
+-e git+https://github.com/SmileyChris/easy-thumbnails.git#egg=easy_thumbnails
