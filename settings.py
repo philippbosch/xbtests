@@ -59,6 +59,8 @@ INSTALLED_APPS = (
     'south',
     'compressor',
     'orienteer',
+    
+    'pagetests',
 )
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -101,7 +103,7 @@ COMPRESS_OUTPUT_DIR = 'compressed'
 COMPASS_PROJECT_DIR = os.path.join(MEDIA_ROOT, 'static')
 COMPASS_OUTPUT_DIR = 'css/'
 COMPASS_OUTPUT_URL = MEDIA_URL + 'static/css/'
-COMPASS_BIN = '/Users/pb/.gem/ruby/1.8/bin/compass'
+COMPASS_BIN = '/usr/local/bin/compass'
 COMPASS_STYLE = 'compact'
 COMPASS_USE_TIMESTAMP = False
 COMPASS_QUIET = True
