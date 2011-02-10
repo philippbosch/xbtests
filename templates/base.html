@@ -1,42 +1,37 @@
 {% load compress orienteer %}<!doctype html>
-<html lang="{{ LANGUAGE_CODE }}" class="no-js">
-
-<head>
-    <meta charset="utf-8">
-    <title>{% block site_name %}SITE NAME<!-- TODO -->{% endblock %}</title>
-    {% compress css %}
-        {% compass "screen" "screen, projection" %}
-    {% endcompress %}
-    <!--[if IE]><link href="{{ MEDIA_URL }}static/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css"><![endif]-->
-    {% compress css %}
-    <link href="{{ MEDIA_URL}}static/css/print.css" media="print" rel="stylesheet" type="text/css">
-    {% endcompress %}
-    <link rel="icon" href="{{ MEDIA_URL }}static/favicon.ico" type="image/vnd.microsoft.icon">
-    <link rel="shortcut icon" href="{{ MEDIA_URL }}static/favicon.ico" type="image/vnd.microsoft.icon">
-</head>
-
-<body>
-    {% block body %}
-    <div id="wrapper">
-        <div id="header">
-            {% block header %}
-                <h1>SITE NAME<!-- TODO --></h1>
-            {% endblock %}
-        </div>
-        {% block main %}
-            <div id="content">
-                {% block content %}
-                {% endblock %}
-            </div>
-        {% endblock %}
-        <div id="footer">
-        </div>
-    </div>
-    {% endblock %}
-    {% compress js %}
-        <script type="text/javascript" src="{{ MEDIA_URL }}static/js/lib/modernizr.js"></script>
-        <script type="text/javascript" src="{{ MEDIA_URL }}static/js/lib/jquery.js"></script>
-    {% endcompress %}
-</body>
-
+<html lang="{{ LANGUAGE_CODE }}">
+    
+    <head>
+        <meta charset="utf-8">
+        <title>{% block site_name %}Philipp Bosch. Cross-Browser Tests.{% endblock %}</title>
+        <link href="http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold|Droid+Sans+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="http://pb.io/static/stylesheets/base.css">
+        {% compress css %}
+            {% compass "screen" "screen, projection" %}
+        {% endcompress %}
+    </head>
+    
+    <body>
+        <div id="logo">›»</div>
+        <header id="header">
+            <h1><a href="/">Cross-Browser Tests</a></h1>
+            <a href="http://pb.io/" id="identity" class="dimmed">
+                <div class="fn">Philipp Bosch</div>
+                <div class="subline">Web &amp; Mobile Development</div>
+            </a>
+        </header>
+        
+        <section id="content">
+            {% block content %}{% endblock %}
+        </section>
+        
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+        <script src="{{ MEDIA_URL }}static/javascripts/master.js"></script>
+        
+    </body>
+    
 </html>
+
+
+

@@ -1,3 +1,6 @@
+import re
+
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -5,16 +8,34 @@ from django.contrib.auth.models import User
 
 
 class Test(models.Model):
+    title = models.CharField(verbose_name=_("title"), max_length=128, blank=True)
     url = models.URLField(verbose_name=_("URL"), verify_exists=False)
     test_date = models.DateTimeField(verbose_name=_("date"))
-    users = models.ManyToManyField(User, verbose_name=_("users"))
+    users = models.ManyToManyField(User, verbose_name=_("users"), blank=True)
     
     def __unicode__(self):
         return u"%s" % self.url
+    
+    def get_absolute_url(self):
+        return reverse('test_detail', args=(self.pk,))
+    
+    class Meta:
+        ordering = ('-test_date',)
+    
+    @property
+    def pretty_url(self):
+        return re.sub(r'^\w+\:\/\/', '', self.url)
+    
+    @property
+    def results_count(self):
+        count = 0
+        for version in self.testversions.all():
+            count += version.testversionresults.count()
+        return count
 
 
 class TestVersion(models.Model):
-    test = models.ForeignKey(Test, verbose_name=_("test"))
+    test = models.ForeignKey(Test, verbose_name=_("test"), related_name="testversions")
     version_date = models.DateTimeField(verbose_name=_("date"))
     count_successful = models.PositiveIntegerField(verbose_name=_("successful results"))
     count_not_finished = models.PositiveIntegerField(verbose_name=_("not finished results"))
@@ -27,12 +48,15 @@ class TestVersion(models.Model):
     
     def __unicode__(self):
         return u"%s @ %s" % (self.test.url, self.version_date,)
+    
+    class Meta:
+        ordering = ('-version_date',)
 
 
 class TestVersionResult(models.Model):
-    testversion = models.ForeignKey(TestVersion, verbose_name=_("version"))
+    testversion = models.ForeignKey(TestVersion, verbose_name=_("version"), related_name="testversionresults")
     start_date = models.DateTimeField(verbose_name=_("start date"))
-    finished_date = models.DateTimeField(verbose_name=_("finished date"))
+    finished_date = models.DateTimeField(verbose_name=_("finished date"), blank=True, null=True)
     status = models.CharField(verbose_name=_("status"), max_length=64)
     os = models.CharField(verbose_name=_("operating system"), max_length=128)
     browser = models.CharField(verbose_name=_("browser"), max_length=128)
@@ -45,3 +69,6 @@ class TestVersionResult(models.Model):
     
     def __unicode__(self):
         return u"%s :: %s :: %s :: %s" % (self.testversion, self.os, self.browser, self.resolution)
+    
+    class Meta:
+        ordering = ('-finished_date',)

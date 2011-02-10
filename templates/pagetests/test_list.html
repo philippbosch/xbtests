@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    {% if test_list.count %}
+        <ul class="tests">
+        {% for test in test_list %}
+            <li>
+                <a href="{{ test.get_absolute_url }}">
+                    {% if test.title %}
+                        <h1>{{ test.title }}</h1>
+                        <h2>{{ test.pretty_url }}</h2>
+                    {% else %}
+                        <h1>{{ test.pretty_url }}</h1>
+                    {% endif %}
+                    <div class="meta">
+                        {% blocktrans with num_versions=test.testversions.count num_results=test.results_count %}{{ num_versions }} versions, {{ num_results }} screenshots{% endblocktrans %}
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        {% trans "Sorry, no tests available to you at the moment." %}
+    {% endif %}
+{% endblock %}

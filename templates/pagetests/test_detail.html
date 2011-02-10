@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    {% if test.title %}
+        <h1>{{ test.title }}</h1>
+        <h2><a href="{{ test.url }}" class="external">{{ test.pretty_url }}</a></h2>
+    {% else %}
+        <h1><a href="{{ test.url }}" class="external">{{ test.pretty_url }}</a></h1>
+    {% endif %}
+    
+    <ul class="versions">
+    {% for version in test.testversions.all %}
+        <li>
+            <div class="item">
+                <h2><strong>{{ version.version_date|date }}</strong> {{ version.version_date|time:"H:i" }}</h2>
+                <div class="meta">{% blocktrans with num_results=version.testversionresults.count num_successful=version.count_successful num_not_finished=version.count_not_finished %}{{ num_results }} screenshots, {{ num_successful }} successful, {{ num_not_finished }} not finished{% endblocktrans %}</div>
+                <div class="meta">{% blocktrans with num_html_errors=version.w3c_html_errors num_html_warnings=version.w3c_html_warnings num_css_errors=version.w3c_css_errors %}{{ num_html_errors }} HTML errors, {{ num_html_warnings }} HTML warnings, {{ num_css_errors }} CSS errors{% endblocktrans %}</div>
+                
+                <ul class="results">
+                    {% for result in version.testversionresults.all %}
+                        <li>
+                            <a href="{{ result.windowed }}"><img src="{{ result.windowed_thumb }}"></a>
+                            <div class="meta">{{ result.os }} » {{ result.browser }} » {{ result.resolution }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

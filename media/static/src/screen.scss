@@ -1,1 +1,105 @@
-@import "compass/reset";
+@import "compass/utilities";
+@import "compass/css3";
+
+$green: #A5C261;
+
+#content > * {
+    max-width: none;
+}
+
+
+#identity {
+    .fn {
+        color: #555;
+    }
+    .subline {
+        color: #444;
+    }
+    
+    &:hover {
+        .fn {
+            color: #FFF;
+        }
+        
+        .subline {
+            color: inherit;
+        }
+    }
+}
+
+#header {
+    h1 {
+        color: #FFF;
+        font-size: 28px;
+        margin-top: 0;
+        margin-bottom: 36px;
+    }
+}
+
+
+
+
+
+$border-color: #ddd;
+ul.tests, ul.versions {
+    border-bottom: 1px solid $border-color;
+    
+    a, .item {
+        display: block;
+        padding: 4px 0 24px 0;
+        border-top: 1px solid $border-color;
+    }
+    
+    a {
+        &:hover {
+            border-top: 4px solid $green;
+            padding-top: 1px;
+            
+            h1 {
+                color: $green;
+            }
+        }
+    }
+    
+    h1 {
+        font-size: 18px;
+        margin-left: 0;
+        margin-bottom: 0;
+    }
+}
+
+ul.results {
+    @include clearfix;
+    
+    li {
+        width: 216px;
+        height: 200px;
+        @include float(left);
+        margin-right: 24px;
+        margin-bottom: 24px;
+        
+        a {
+            padding: 0;
+            border: 0;
+            
+            img {
+                @include opacity(1);
+            }
+            
+            &:hover {
+                border: 0;
+                padding: 0;
+                
+                img {
+                    @include opacity(0.5);
+                }
+            }
+        }
+    }
+}
+
+.meta {
+    color: #999;
+    font-size: 10px;
+    line-height: 12px;
+}
