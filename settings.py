@@ -95,6 +95,9 @@ except IOError:
     except IOError:
         Exception('Please create a %s file with random characters to generate your secret key!' % SECRET_FILE)
 
+# AUTH
+LOGIN_REDIRECT_URL = '/'
+
 # DJANGO-COMPRESSOR
 COMPRESS = True
 COMPRESS_OUTPUT_DIR = 'compressed'

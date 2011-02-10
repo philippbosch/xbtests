@@ -1,4 +1,4 @@
-{% load compress orienteer %}<!doctype html>
+{% load compress orienteer i18n %}<!doctype html>
 <html lang="{{ LANGUAGE_CODE }}">
     
     <head>
@@ -12,23 +12,24 @@
     </head>
     
     <body>
-        <div id="logo">›»</div>
+        <a href="http://pb.io/" id="logo">›»</a>
         <header id="header">
-            <h1><a href="/">Cross-Browser Tests</a></h1>
-            <a href="http://pb.io/" id="identity" class="dimmed">
-                <div class="fn">Philipp Bosch</div>
-                <div class="subline">Web &amp; Mobile Development</div>
+            <a href="/" id="identity">
+                <div class="fn">Cross-Browser Tests</div>
+                <div class="subline">Philipp Bosch. Web &amp; Mobile Development.</div>
             </a>
+            
+            {% if request.user.is_authenticated %}
+                <div id="account">
+                    {% blocktrans with username=request.user %}Logged in as «{{ username }}»{% endblocktrans %}
+                    <a href="{% url logout %}">{% trans "Logout" %}</a>
+                </div>
+            {% endif %}
         </header>
         
         <section id="content">
             {% block content %}{% endblock %}
         </section>
-        
-        
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-        <script src="{{ MEDIA_URL }}static/javascripts/master.js"></script>
-        
     </body>
     
 </html>

@@ -2,45 +2,24 @@
 @import "compass/css3";
 
 $green: #A5C261;
+$border-color: #ddd;
 
 #content > * {
     max-width: none;
 }
 
-
 #identity {
     .fn {
-        color: #555;
-    }
-    .subline {
-        color: #444;
-    }
-    
-    &:hover {
-        .fn {
-            color: #FFF;
-        }
-        
-        .subline {
-            color: inherit;
-        }
-    }
-}
-
-#header {
-    h1 {
-        color: #FFF;
         font-size: 28px;
-        margin-top: 0;
-        margin-bottom: 36px;
     }
 }
 
+#account {
+    margin-top: 48px;
+    color: #555;
+    font-size: 12px;
+}
 
-
-
-
-$border-color: #ddd;
 ul.tests, ul.versions {
     border-bottom: 1px solid $border-color;
     
