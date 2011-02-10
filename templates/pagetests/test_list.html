@@ -2,6 +2,7 @@
 {% load i18n %}
 
 {% block content %}
+    <h1>{% trans "Recent Tests" %}</h1>
     {% if test_list.count %}
         <ul class="tests">
         {% for test in test_list %}

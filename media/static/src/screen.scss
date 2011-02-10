@@ -20,8 +20,13 @@ $border-color: #ddd;
     font-size: 12px;
 }
 
+h1 {
+    margin-bottom: 0;
+}
+
 ul.tests, ul.versions {
     border-bottom: 1px solid $border-color;
+    margin-top: 36px;
     
     a, .item {
         display: block;
@@ -43,7 +48,6 @@ ul.tests, ul.versions {
     h1 {
         font-size: 18px;
         margin-left: 0;
-        margin-bottom: 0;
     }
 }
 
@@ -81,4 +85,10 @@ ul.results {
     color: #999;
     font-size: 10px;
     line-height: 12px;
+}
+
+.admin {
+    position: absolute;
+    right: 96px;
+    top: 48px;
 }
